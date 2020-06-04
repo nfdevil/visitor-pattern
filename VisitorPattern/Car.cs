@@ -1,21 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace VisitorPattern
 {
-    public class Car
+    public class Car : IVisitable<ICarVisitor>
     {
-        public string Make { get; set; }
-        public string Type { get; set; }
+        private readonly string _make;
+        private readonly string _model;
+        private readonly Engine _engine;
+        private readonly IEnumerable<Seat> _seats;
 
-        public Car(string make, string type)
+        public Car(string make, string model, Engine engine, IEnumerable<Seat> seats)
         {
-            Make = make;
-            Type = type;
+            _make = make;
+            _model = model;
+            _engine = engine;
+            _seats = new List<Seat>(seats);
         }
 
-        public string GetDescription()
-            => $"{Make} {Type}";
+        public CarRegistration Register()
+            => new CarRegistration(_make, _model, _engine.CylinderCount, _seats.Sum(x => x.Capacity));
+
+        public void Accept(ICarVisitor visitor)
+        {
+            visitor.Visit(_engine);
+            foreach (Seat seat in _seats)
+            {
+                visitor.Visit(seat);
+            }
+        }
     }
 }

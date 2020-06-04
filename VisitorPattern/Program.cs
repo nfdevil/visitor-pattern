@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VisitorPattern
 {
@@ -6,16 +8,14 @@ namespace VisitorPattern
     {
         static void Main(string[] args)
         {
-            Car[] cars = {
-                new Car("BMW", "3 Touring"),
-                new Car("Audi", "A6"),
-                new Car("Renault", "Clio"),
-                new Car("Toyota", "Auris")
-            };
-            foreach (Car car in cars)
-            {
-                Console.WriteLine(car.GetDescription());
-            }
+            IEnumerable<Car> cars = new CarRepository().GetAll();
+
+            Car oneCar = cars.First();
+            CarRegistration carRegistration = oneCar.Register();
+            Console.WriteLine(carRegistration);
+
+            var carView = new CarView(cars);
+            carView.Render();
         }
     }
 }
