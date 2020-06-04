@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using VisitorPattern.EngineData;
+
 namespace VisitorPattern
 {
     public class Car : IVisitable<ICarVisitor>

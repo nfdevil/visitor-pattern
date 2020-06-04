@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using VisitorPattern.EngineData;
+
 namespace VisitorPattern
 {
     class CarRepository

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using VisitorPattern.EngineData;
+
 namespace VisitorPattern
 {
     // Made CarRegistration a CarVisitor, because Engine data is not publicly accessible
@@ -15,9 +17,9 @@ namespace VisitorPattern
         public override string ToString()
             => $"# Registered car: {_make} {_model} {_cylinders}cc {_maxPassengers} passengers";
 
-        public void VisitEngine(float cylinderCount, float horsePower, bool engineStarted)
+        public void VisitEngine(EngineStructure engineStructure, EngineStatus engineStatus)
         {
-            _cylinders = cylinderCount;
+            _cylinders = engineStructure.CylinderCount;
         }
 
         public void VisitSeat(Seat seat)

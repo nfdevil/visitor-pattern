@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using VisitorPattern.EngineData;
+
 namespace VisitorPattern
 {
     public class CarToStringVisitor : ICarVisitor
@@ -14,9 +16,9 @@ namespace VisitorPattern
         private string _engineDetails;
         
         private int _seatCount;
-        public void VisitEngine(float cylinderCount, float horsePower, bool engineStarted)
+        public void VisitEngine(EngineStructure engineStructure, EngineStatus engineStatus)
         {
-            _engineDetails = $"{cylinderCount}cc {horsePower}hp";
+            _engineDetails = $"{engineStructure.CylinderCount}cc {engineStructure.HorsePower}hp";
         }
 
         public void VisitSeat(Seat seat)

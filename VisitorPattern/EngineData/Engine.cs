@@ -1,10 +1,10 @@
-﻿namespace VisitorPattern
+﻿namespace VisitorPattern.EngineData
 {
     public class Engine : IVisitable<ICarPartVisitor>
     {
         private readonly float _cylinderCount;
         private readonly float _horsePower;
-        private bool _engineStarted;
+        private bool _isRunning;
 
         public Engine(float cylinderCount, float horsePower)
         {
@@ -14,9 +14,11 @@
 
         public void Accept(ICarPartVisitor visitor)
         {
-            visitor.VisitEngine(_cylinderCount, _horsePower, _engineStarted);
+            var engineStructure = new EngineStructure(_horsePower, _cylinderCount);
+            var engineStatus = new EngineStatus(_isRunning, 0);
+            visitor.VisitEngine(engineStructure, engineStatus);
         }
 
-        public void StartEngine() => _engineStarted = true;
+        public void StartEngine() => _isRunning = true;
     }
 }
