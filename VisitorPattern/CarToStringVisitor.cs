@@ -8,11 +8,15 @@ namespace VisitorPattern
 {
     public class CarToStringVisitor : ICarVisitor
     {
-        private readonly StringBuilder _report = new StringBuilder();
+        // Separate detail fields to make sure if the order of the "Visit()" calls is changed, the order
+        // of the strings is still OK, which is defined in the GetCarDescription() method
+        private string _carDetails;
+        private string _engineDetails;
+        
         private int _seatCount;
         public void Visit(Engine engine)
         {
-            _report.Append($" {engine.CylinderCount}cc {engine.HorsePower}hp");
+            _engineDetails = $"{engine.CylinderCount}cc {engine.HorsePower}hp";
         }
 
         public void Visit(Seat seat)
@@ -22,13 +26,12 @@ namespace VisitorPattern
 
         public void Visit(string make, string model)
         {
-            _report.Append($"{make} {model}");
+            _carDetails = $"{make} {model}";
         }
 
         public string GetCarDescription()
         {
-            _report.Append($" {_seatCount} passengers");
-            return _report.ToString();
+            return $"{_carDetails} {_engineDetails} {_seatCount} passengers";
         }
     }
 }
