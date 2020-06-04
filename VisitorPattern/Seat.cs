@@ -35,7 +35,7 @@ namespace VisitorPattern
 
         public void Accept(ICarPartVisitor visitor)
         {
-            visitor.Visit(this);
+            visitor.VisitSeat(this);
         }
     }
 }

@@ -14,12 +14,12 @@ namespace VisitorPattern
         private string _engineDetails;
         
         private int _seatCount;
-        public void Visit(Engine engine)
+        public void VisitEngine(float cylinderCount, float horsePower, bool engineStarted)
         {
-            _engineDetails = $"{engine.CylinderCount}cc {engine.HorsePower}hp";
+            _engineDetails = $"{cylinderCount}cc {horsePower}hp";
         }
 
-        public void Visit(Seat seat)
+        public void VisitSeat(Seat seat)
         {
             _seatCount += seat.Capacity;
         }

@@ -2,18 +2,21 @@
 {
     public class Engine : IVisitable<ICarPartVisitor>
     {
-        public float CylinderCount { get; }
-        public float HorsePower { get; }
+        private readonly float _cylinderCount;
+        private readonly float _horsePower;
+        private bool _engineStarted;
 
         public Engine(float cylinderCount, float horsePower)
         {
-            CylinderCount = cylinderCount;
-            HorsePower = horsePower;
+            _cylinderCount = cylinderCount;
+            _horsePower = horsePower;
         }
 
         public void Accept(ICarPartVisitor visitor)
         {
-            visitor.Visit(this);
+            visitor.VisitEngine(_cylinderCount, _horsePower, _engineStarted);
         }
+
+        public void StartEngine() => _engineStarted = true;
     }
 }

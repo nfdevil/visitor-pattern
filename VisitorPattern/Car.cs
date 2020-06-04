@@ -21,15 +21,18 @@ namespace VisitorPattern
         }
 
         public CarRegistration Register()
-            => new CarRegistration(_make, _model, _engine.CylinderCount, _seats.Sum(x => x.Capacity));
-
+        {
+            var carRegistration = new CarRegistration();
+            Accept(carRegistration);
+            return carRegistration;
+        }
         public void Accept(ICarVisitor visitor)
         {
             visitor.Visit(_make, _model);
-            visitor.Visit(_engine);
+            _engine.Accept(visitor);
             foreach (Seat seat in _seats)
             {
-                visitor.Visit(seat);
+                seat.Accept(visitor);
             }
         }
     }

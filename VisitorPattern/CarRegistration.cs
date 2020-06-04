@@ -4,23 +4,31 @@ using System.Text;
 
 namespace VisitorPattern
 {
-    public class CarRegistration
+    // Made CarRegistration a CarVisitor, because Engine data is not publicly accessible
+    public class CarRegistration : ICarVisitor
     {
-        private readonly string _make;
-        private readonly string _model;
-        private readonly float _cylinders;
-        private readonly int _maxPassengers;
-
-        public CarRegistration(string make, string model, float cylinders, int maxPassengers)
-        {
-            _make = make;
-            _model = model;
-            _cylinders = cylinders;
-            _maxPassengers = maxPassengers;
-        }
+        private string _make;
+        private string _model;
+        private float _cylinders;
+        private int _maxPassengers;
 
         public override string ToString()
             => $"# Registered car: {_make} {_model} {_cylinders}cc {_maxPassengers} passengers";
 
+        public void VisitEngine(float cylinderCount, float horsePower, bool engineStarted)
+        {
+            _cylinders = cylinderCount;
+        }
+
+        public void VisitSeat(Seat seat)
+        {
+            _maxPassengers += seat.Capacity;
+        }
+
+        public void Visit(string make, string model)
+        {
+            _make = make;
+            _model = model;
+        }
     }
 }

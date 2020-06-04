@@ -6,7 +6,10 @@ namespace VisitorPattern
 {
     public interface ICarPartVisitor : IVisitor
     {
-        void Visit(Engine engine);
-        void Visit(Seat seat);
+        // Engine has behavior (StartEngine()), so its data is also encapsulated
+        // The Visit receives its data
+        void VisitEngine(float cylinderCount, float horsePower, bool engineStarted);
+        // Seat has no behavior, it is a simple data structure, so it can be passed as full object
+        void VisitSeat(Seat seat);
     }
 }
