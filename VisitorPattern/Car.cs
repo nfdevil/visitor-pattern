@@ -25,6 +25,7 @@ namespace VisitorPattern
 
         public void Accept(ICarVisitor visitor)
         {
+            visitor.Visit(_make, _model);
             visitor.Visit(_engine);
             foreach (Seat seat in _seats)
             {

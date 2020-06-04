@@ -20,9 +20,9 @@ namespace VisitorPattern
             _seatCount += seat.Capacity;
         }
 
-        public void Visit(Car car)
+        public void Visit(string make, string model)
         {
-            _report.Append($"");
+            _report.Append($"{make} {model}");
         }
 
         public string GetCarDescription()
