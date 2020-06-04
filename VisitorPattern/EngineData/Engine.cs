@@ -1,6 +1,8 @@
-﻿namespace VisitorPattern.EngineData
+﻿using System;
+
+namespace VisitorPattern.EngineData
 {
-    public class Engine : IVisitable<ICarPartVisitor>
+    public class Engine
     {
         private readonly float _cylinderCount;
         private readonly float _horsePower;
@@ -12,11 +14,11 @@
             _horsePower = horsePower;
         }
 
-        public void Accept(ICarPartVisitor visitor)
+        public void Accept(Func<ICarPartVisitor> visitorFactory)
         {
             var engineStructure = new EngineStructure(_horsePower, _cylinderCount);
             var engineStatus = new EngineStatus(_isRunning, 0);
-            visitor.VisitEngine(engineStructure, engineStatus);
+            visitorFactory().VisitEngine(engineStructure, engineStatus);
         }
 
         public void StartEngine() => _isRunning = true;

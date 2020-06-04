@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VisitorPattern
 {
-    public class Seat : IVisitable<ICarPartVisitor>
+    public class Seat
     {
         public string Name { get; set; }
         public int Capacity { get; set; }
@@ -33,9 +33,9 @@ namespace VisitorPattern
                 new Seat("Passenger", 1),
             };
 
-        public void Accept(ICarPartVisitor visitor)
+        public void Accept(Func<ICarPartVisitor> visitorFactory)
         {
-            visitor.VisitSeat(this);
+            visitorFactory().VisitSeat(this);
         }
     }
 }

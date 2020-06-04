@@ -17,9 +17,8 @@ namespace VisitorPattern
         {
             foreach (Car car in _cars)
             {
-                var converter = new CarToStringVisitor();
-                car.Accept(converter);
-                Console.WriteLine(converter.GetCarDescription());
+                string report = car.Accept(() => new CarToStringVisitor());
+                Console.WriteLine(report);
 
             }
         }

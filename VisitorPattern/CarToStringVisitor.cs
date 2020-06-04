@@ -8,7 +8,7 @@ using VisitorPattern.EngineData;
 
 namespace VisitorPattern
 {
-    public class CarToStringVisitor : ICarVisitor
+    public class CarToStringVisitor : ICarVisitor<string>
     {
         // Separate detail fields to make sure if the order of the "Visit()" calls is changed, the order
         // of the strings is still OK, which is defined in the GetCarDescription() method
@@ -26,12 +26,12 @@ namespace VisitorPattern
             _seatCount += seat.Capacity;
         }
 
-        public void Visit(string make, string model)
+        public void VisitCar(string make, string model)
         {
             _carDetails = $"{make} {model}";
         }
 
-        public string GetCarDescription()
+        public string ProduceResult()
         {
             return $"{_carDetails} {_engineDetails} {_seatCount} passengers";
         }

@@ -14,7 +14,11 @@ namespace VisitorPattern
             CarRegistration carRegistration = oneCar.Register();
             Console.WriteLine(carRegistration);
 
+            oneCar.Accept(() => new SaveCarVisitor());
+
             var carView = new CarView(cars);
+
+            
             carView.Render();
         }
     }

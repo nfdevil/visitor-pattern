@@ -6,7 +6,7 @@ using VisitorPattern.EngineData;
 
 namespace VisitorPattern
 {
-    public interface ICarPartVisitor : IVisitor
+    public interface ICarPartVisitor
     {
         // Engine has behavior (StartEngine()), so its data is also encapsulated
         // The Visit receives its data

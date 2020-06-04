@@ -11,6 +11,6 @@ namespace VisitorPattern
         //void Visit(Car car);
         // Preserve encapsulation by having the visit receive the needed data instead of the whole Car object
         // which does not have any data publicly available (all data are private fields)
-        void Visit(string make, string model);
+        void VisitCar(string make, string model);
     }
 }

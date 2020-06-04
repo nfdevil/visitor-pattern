@@ -7,30 +7,22 @@ using VisitorPattern.EngineData;
 namespace VisitorPattern
 {
     // Made CarRegistration a CarVisitor, because Engine data is not publicly accessible
-    public class CarRegistration : ICarVisitor
+    public class CarRegistration
     {
-        private string _make;
-        private string _model;
-        private float _cylinders;
-        private int _maxPassengers;
+        private readonly string _make;
+        private readonly string _model;
+        private readonly float _cylinders;
+        private readonly int _maxPassengers;
 
-        public override string ToString()
-            => $"# Registered car: {_make} {_model} {_cylinders}cc {_maxPassengers} passengers";
-
-        public void VisitEngine(EngineStructure engineStructure, EngineStatus engineStatus)
-        {
-            _cylinders = engineStructure.CylinderCount;
-        }
-
-        public void VisitSeat(Seat seat)
-        {
-            _maxPassengers += seat.Capacity;
-        }
-
-        public void Visit(string make, string model)
+        public CarRegistration(string make, string model, float cylinders, int maxPassengers)
         {
             _make = make;
             _model = model;
+            _cylinders = cylinders;
+            _maxPassengers = maxPassengers;
         }
+
+        public override string ToString()
+            => $"# Registered car: {_make} {_model} {_cylinders}cc {_maxPassengers} passengers";
     }
 }
